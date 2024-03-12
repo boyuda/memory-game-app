@@ -32,11 +32,20 @@ function App() {
     //On Click
     console.log(`Clicked on ${value}`);
     //1. Check if item already exists in selected array
-    //2. If not add selected card to an array
-    setSelectedCards([...selectedCards, value]);
+    if (!selectedCards.includes(value)) {
+      //2. If not add selected card to an array
+      setSelectedCards([...selectedCards, value]);
+      //Current score higher than highest?
 
-    //3. Increase score (if it's higher than highscore - increase highscore)
-    setScore((previousScore) => previousScore + 1);
+      setScore((previousScore) => previousScore + 1);
+    } else {
+      if (highestScore < score) {
+        setHighestScore(score);
+        setScore(0);
+      }
+      setSelectedCards([]);
+      shuffleCards();
+    }
 
     //4. Shuffle cards
     shuffleCards();
