@@ -33,6 +33,8 @@ function App() {
     console.log(`Clicked on ${value}`);
     //1. Check if item already exists in selected array
     //2. If not add selected card to an array
+    setSelectedCards([...selectedCards, value]);
+
     //3. Increase score (if it's higher than highscore - increase highscore)
     //4. Shuffle cards
     shuffleCards();
