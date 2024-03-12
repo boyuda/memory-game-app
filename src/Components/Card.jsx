@@ -1,7 +1,7 @@
-function Card() {
+function Card({ value }) {
   return (
     <div className="card-item">
-      <p>1</p>
+      <p>{value}</p>
     </div>
   );
 }

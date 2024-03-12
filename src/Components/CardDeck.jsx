@@ -1,24 +1,11 @@
 import Card from './Card';
 
-function CardDeck() {
+function CardDeck({ cards }) {
   return (
     <div className="deck-container">
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      {cards.map((card, index) => (
+        <Card key={index} value={card} />
+      ))}
     </div>
   );
 }
