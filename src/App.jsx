@@ -11,7 +11,7 @@ function App() {
   // Game started state
   // Array with selected card items
   const [score, setScore] = useState(0);
-  const [highScore, setHighScore] = useState(0);
+  const [highestScore, setHighestScore] = useState(0);
   const [gameStatus, getGameStatus] = useState(false);
   const [cards, setCards] = useState([
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
@@ -36,13 +36,15 @@ function App() {
     setSelectedCards([...selectedCards, value]);
 
     //3. Increase score (if it's higher than highscore - increase highscore)
+    setScore((previousScore) => previousScore + 1);
+
     //4. Shuffle cards
     shuffleCards();
   };
 
   return (
     <div className="container">
-      <Score />
+      <Score score={score} highestScore={highestScore} />
       <CardDeck cards={cards} selectCard={selectCards} />
     </div>
   );
