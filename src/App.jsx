@@ -28,7 +28,7 @@ function App() {
         }
       };
       //Why it prints 16 instead of 8?
-      for (let index = 0; index < 8; index++) {
+      for (let index = 0; index < 16; index++) {
         fetchData();
       }
       setGameOn(true);
