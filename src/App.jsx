@@ -4,40 +4,25 @@ import CardDeck from './Components/CardDeck';
 import Score from './Components/Score';
 
 function App() {
-  // States
-  // Need following states:
-  // Score, High Score
-  // Array with items
-  // Game started state
-  // Array with selected card items
   const [score, setScore] = useState(0);
   const [highestScore, setHighestScore] = useState(0);
   const [gameOn, setGameOn] = useState(false);
   const [cards, setCards] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
 
-  //Effects
-  //Need following effects:
-  //API Fetch, when game is started
-
   useEffect(() => {
-    //Populate once on load
     if (!gameOn) {
       const fetchData = async () => {
         try {
-          const randomNumber = Math.floor(Math.random() * 100) + 1;
+          const randomNumber = Math.floor(Math.random() * 400) + 1;
           const url = `https://pokeapi.co/api/v2/pokemon/${randomNumber}`;
           const response = await fetch(url);
           const json = await response.json();
 
           //Extract Image from the object
           const imageUrl = json.sprites.other.dream_world.front_default;
-          console.log('api fetched');
 
-          //Card already exists in the array?
-          !cards.includes(imageUrl)
-            ? setCards((previousCards) => [...previousCards, imageUrl])
-            : fetchData();
+          setCards((prevCards) => [...prevCards, imageUrl]);
         } catch (error) {
           console.log('error', error);
         }
@@ -48,8 +33,6 @@ function App() {
       }
       setGameOn(true);
     }
-
-    //fetchData();
   }, []);
 
   // Randomize Cards
@@ -67,8 +50,8 @@ function App() {
     } else {
       if (highestScore < score) {
         setHighestScore(score);
-        setScore(0);
       }
+      setScore(0);
       setGameOn(false);
       setSelectedCards([]);
     }
