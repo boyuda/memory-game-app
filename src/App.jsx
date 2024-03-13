@@ -21,24 +21,28 @@ function App() {
   //API Fetch, when game is started
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const randomNumber = Math.floor(Math.random() * 100) + 1;
-        const url = `https://pokeapi.co/api/v2/pokemon/${randomNumber}`;
-        const response = await fetch(url);
-        const json = await response.json();
+    //Populate once on load
+    if (!gameOn) {
+      const fetchData = async () => {
+        try {
+          const randomNumber = Math.floor(Math.random() * 100) + 1;
+          const url = `https://pokeapi.co/api/v2/pokemon/${randomNumber}`;
+          const response = await fetch(url);
+          const json = await response.json();
 
-        //Extract Image from the object
-        const imageUrl = json.sprites.other.dream_world.front_default;
-        console.log('api fetched');
-        setCards((previousCards) => [...previousCards, imageUrl]);
-      } catch (error) {
-        console.log('error', error);
+          //Extract Image from the object
+          const imageUrl = json.sprites.other.dream_world.front_default;
+          console.log('api fetched');
+          setCards((previousCards) => [...previousCards, imageUrl]);
+        } catch (error) {
+          console.log('error', error);
+        }
+      };
+      //Why it prints 16 instead of 8?
+      for (let index = 0; index < 8; index++) {
+        fetchData();
       }
-    };
-    //Why it prints 16 instead of 8?
-    for (let index = 0; index < 8; index++) {
-      fetchData();
+      setGameOn(true);
     }
 
     //fetchData();
@@ -61,6 +65,7 @@ function App() {
         setHighestScore(score);
         setScore(0);
       }
+      setGameOn(false);
       setSelectedCards([]);
     }
 
