@@ -5,7 +5,8 @@ function Card({ value, handleClick }) {
 
   return (
     <div className="card-item" onClick={handleClickCard}>
-      <p>{value}</p>
+      {/* <p>{value}</p> */}
+      <img src={value} width={80} height={80} />
     </div>
   );
 }

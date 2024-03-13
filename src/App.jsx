@@ -33,7 +33,11 @@ function App() {
           //Extract Image from the object
           const imageUrl = json.sprites.other.dream_world.front_default;
           console.log('api fetched');
-          setCards((previousCards) => [...previousCards, imageUrl]);
+
+          //Card already exists in the array?
+          !cards.includes(imageUrl)
+            ? setCards((previousCards) => [...previousCards, imageUrl])
+            : fetchData();
         } catch (error) {
           console.log('error', error);
         }
